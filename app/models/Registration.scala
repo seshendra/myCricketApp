@@ -24,8 +24,7 @@ case class Roster(playerName: String, playerSkill: String) {}
 object Tournaments {
   val registerTournaments = MongoConnection()("myCricketApp")("tournaments")
   
-  val temp = Tournaments(tournamentName = "IPL")
-  def all = registerTournaments.map(grater[Tournaments].asObject(temp)).toList
+  def all = registerTournaments.map(grater[Tournaments].asObject(_)).toList
   
   def create(tournaments: Tournaments) {
     registerTournaments += grater[Tournaments].asDBObject(tournaments)
