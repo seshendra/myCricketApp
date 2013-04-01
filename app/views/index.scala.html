@@ -1,0 +1,35 @@
+@(tournamentList: List[Tournaments])(implicit flash: Flash)
+
+@main("Welcome to Cricket Tournament App") {
+  @if(flash.data.contains("message")){
+    <div class='row'>
+      <div class="alert alert-success" style="margin-left:30px;margin-top:20px;">@flash.get("message")</div>
+    </div>
+  }
+  <div style="margin-top:20px;margin-bottom:20px;">
+    <a href="@routes.Register.index1" class="btn btn-primary">Register Tournament</a>
+    <a href="@routes.Register.index2" class="btn btn-primary">Register Team</a>
+    <a href="@routes.Register.index3" class="btn btn-primary">Create Roster</a>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Tournament Name</th>
+        <th>Tournament Format</th>
+        <th>Tournament Location</th>
+        <th>List of Teams</th>
+      </tr>
+    </thead>
+    <tbody>
+      @tournamentList.map { tournament =>
+        <tr>
+          <td>@tournament.tournamentName</td>
+          <td>@tournament.tournamentFormat</td>
+          <td>@tournament.location</td>
+          <td>@tournament.teams</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

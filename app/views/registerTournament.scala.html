@@ -1,0 +1,39 @@
+@(registrationForm: Form[models.Tournaments])(implicit flash: Flash)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@input(field: Field, label: String, fieldType: Symbol = 'text) = {
+  <div class="control-group @if(field.hasErrors) {error}">
+    <label class="control-label" for="@field.id">@label</label>
+    <div class="controls">
+      <input type="@fieldType.name" value="@field.value" name="@field.id" />
+      @if(field.hasErrors){
+        <span class="help-inline">
+          @Messages(field.error.head.message)
+        </span>
+      }
+    </div>
+  </div>
+}
+
+@main("Welcome to Cricket Tournament Registration") {
+
+    @form(action = routes.Register.registerTournament, 'class -> "form-horizontal") {
+
+      <fieldset>
+        <legend>Add Tournament</legend>
+        @* GLOBAL ERROR/FLASH MESSAGE *@
+        @registrationForm.globalError.map { error =>
+          <div class='row'>
+            <div class="alert alert-error" style="margin-left:30px;margin-top:20px;">@error.message</div>
+          </div>
+        }
+        @input(registrationForm("tournamentName"), "Tournament Name")
+        @input(registrationForm("location"), "Location")
+        @input(registrationForm("teams"), "Teams")
+        @input(registrationForm("tournamentFormat"), "Format")
+      </fieldset>
+      <input type="submit" class="btn" value="Register"/>
+    }
+}

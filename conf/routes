@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Routes for the cricket tournament application
+GET		/tournaments			controllers.Application.tournaments
+GET		/teams					controllers.Application.teams
+GET 	/registerTournament		controllers.Register.index1
+GET 	/registerTeam			controllers.Register.index2
+GET 	/registerRoster			controllers.Register.index3
+
+# Post routes for the registration
+POST /registerRoster controllers.Register.registerRoster
+POST /registerTournament controllers.Register.registerTournament
+POST /registerTeam controllers.Register.registerTeam
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
